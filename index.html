@@ -5,22 +5,31 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Para Kefny 💬</title>
   <meta name="description" content="Un mensajito sincero y ligero." />
+  <meta name="theme-color" content="#0f62fe" />
   <style>
     :root { --brand:#0f62fe; --bg:#f4f6f8; --card:#fff; --line:#e5e7eb; }
     * { box-sizing: border-box; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:var(--bg); color:#111; }
-    .app { max-width: 700px; height: 100svh; margin: 0 auto; display:flex; flex-direction:column; }
-    header { padding: 14px 16px; background: var(--brand); color: #fff; font-weight: 700; }
-    #chat { flex:1; overflow:auto; padding: 14px; display:flex; flex-direction:column; gap:10px; }
-    .msg { max-width: 82%; padding:10px 12px; border-radius:14px; line-height:1.35; word-wrap: break-word; }
-    .bot { background: var(--card); border:1px solid var(--line); align-self:flex-start; }
-    .you { background: var(--brand); color:#fff; align-self:flex-end; }
+    body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:#111; }
+    .app { max-width:700px; height:100svh; margin:0 auto; display:flex; flex-direction:column; }
+    header { padding:14px 16px; background:var(--brand); color:#fff; font-weight:700; }
+    #chat {
+      flex:1; overflow:auto; padding:14px; display:flex; flex-direction:column; gap:10px;
+      /* Fondo con imagen */
+      background-image: linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)), url('fondo.jpg');
+      background-size: cover; background-position: center; background-attachment: fixed;
+    }
+    .msg { max-width:82%; padding:10px 12px; border-radius:14px; line-height:1.35; word-wrap:break-word; }
+    .bot { background:var(--card); border:1px solid var(--line); align-self:flex-start; }
+    .you { background:var(--brand); color:#fff; align-self:flex-end; }
     .hint { font-size:12px; color:#6b7280; text-align:center; padding:6px 0 10px; }
-    form { display:flex; gap:8px; padding: 12px; background:#fff; border-top:1px solid var(--line); }
-    input { flex:1; padding:12px; border:1px solid #cfd6e4; border-radius: 10px; font-size:16px; }
-    button { padding:12px 14px; border:0; border-radius:10px; background: var(--brand); color:#fff; font-weight:600; cursor:pointer; }
+    form { display:flex; gap:8px; padding:12px; background:#fff; border-top:1px solid var(--line); }
+    input { flex:1; padding:12px; border:1px solid #cfd6e4; border-radius:10px; font-size:16px; }
+    button { padding:12px 14px; border:0; border-radius:10px; background:var(--brand); color:#fff; font-weight:600; cursor:pointer; }
     .chips { display:flex; flex-wrap:wrap; gap:8px; }
-    .chip { background:#fff; border:1px solid var(--line); border-radius:999px; padding:8px 12px; cursor:pointer; }
+    .chip {
+      background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:999px;
+      padding:8px 12px; cursor:pointer; color:#111; font-weight:600;
+    }
     .fade-in { animation: fade .18s ease-in; }
     @keyframes fade { from { opacity:0; transform:translateY(2px) } to { opacity:1; transform:none } }
     .muted { color:#6b7280; font-size:12px; }
@@ -42,8 +51,6 @@
     const form = document.getElementById('send');
     const input = document.getElementById('input');
 
-    const state = { step: 0 };
-
     function addMsg(text, who='bot') {
       const node = document.createElement('div');
       node.className = `msg ${who} fade-in`;
@@ -61,8 +68,7 @@
         b.className = 'chip';
         b.textContent = opt.label;
         b.addEventListener('click', () => {
-          // echo
-          addMsg(opt.label, 'you');
+          addMsg(opt.label, 'you');                 // eco del usuario
           wrap.querySelectorAll('button').forEach(x => x.disabled = true);
           wrap.style.opacity = .6;
           setTimeout(() => opt.onClick && opt.onClick(), 350);
@@ -73,7 +79,8 @@
       chat.scrollTop = chat.scrollHeight;
     }
 
-    function typeLines(lines, gap = 650, then = null) {
+    // 4 segundos por defecto entre mensajes
+    function typeLines(lines, gap = 4000, then = null) {
       let i = 0;
       (function next(){
         if (i >= lines.length) { if (then) setTimeout(then, 350); return; }
@@ -83,18 +90,14 @@
     }
 
     function startFlow(){
-      // Paso 0: saludo
       addMsg('Hola mi bebecita hermosa preciosa! 👋', 'bot');
-      addButtons([
-        { label: '¡Hola!', onClick: () => paso1() }
-      ]);
+      addButtons([{ label: '¡Hola!', onClick: () => paso1() }]);
     }
 
     function paso1() {
-      // Mensajes sinceros (Guion A)
       const lines = [
         'Sé que ayer tuvimos un problema.',
-        'Te mentí, y te enojaste conmigo. Cometi un error y la verdad que no hay excusas.',
+        'Te mentí, y te enojaste conmigo. Cometí un error y la verdad que no hay excusas.',
         'Sé que esperabas que yo pusiera más esfuerzo para entenderte... en vez de eso te di espacio.',
         'Quiero que sepas que te quiero mucho. Me sale natural hacer cosas por ti porque lo siento de verdad.',
         'Siento amor por ti, y elijo ser sincero contigo a partir de ahora por siempre, aunque a veces la verdad duela.',
@@ -102,8 +105,8 @@
         'Ayer tuve uno de los mejores días contigo.',
         'Gracias por tu paciencia (soy medio insoportable igual que VOCE 😅).',
       ];
-      typeLines(lines, 750, () => {
-        addMsg('Tú me quieres? ❤️');
+      typeLines(lines, 4000, () => {
+        addMsg('¿Tú me quieres? ❤️');
         addButtons([
           { label: 'Sí', onClick: () => pasoSi() },
           { label: 'No', onClick: () => pasoNo() }
@@ -113,12 +116,12 @@
 
     function pasoSi() {
       typeLines([
-        'Gracias por decirme que si mi brontosaurio ❤️',
+        'Gracias por decirme que sí mi brontosaurio ❤️',
         'Obrigado por bancarme.',
         'Quiero demostrarte con hechos lo que siento.',
         'Si te parece, hablemos hoy un ratito. Estoy acá para escucharte.'
-      ], 700, () => {
-        addMsg('Quieres que te escriba más tarde o prefieres ahora?');
+      ], 4000, () => {
+        addMsg('¿Quieres que te escriba más tarde o prefieres ahora?');
         addButtons([
           { label: 'Ahora', onClick: () => { addMsg('Listo. Te llamo en unos minutos. 💬'); cierre(); } },
           { label: 'Más tarde', onClick: () => { addMsg('Perfecto, te escribo más tarde. Obrigado por la paciencia 🙏'); cierre(); } }
@@ -131,7 +134,7 @@
         'Qué pena 😔',
         'Gracias por ser honesta.',
         'No te molesto más. Si algún día cambias de idea, aquí estaré.',
-      ], 750, cierre);
+      ], 4000, cierre);
     }
 
     function cierre() {
@@ -149,12 +152,10 @@
       if (!text) return;
       addMsg(text, 'you');
       input.value = '';
-      // Después del guion, solo respondo amable
-      if (state.step >= 99) addMsg('Gracias por escribirme 💬', 'bot');
     });
 
     window.addEventListener('load', startFlow);
   </script>
 </body>
-
 </html>
+
