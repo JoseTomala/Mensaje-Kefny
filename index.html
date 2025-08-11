@@ -102,14 +102,14 @@
         'Quiero que sepas que te quiero mucho. Me sale natural hacer cosas por ti porque lo siento de verdad',
         'Siento amor por ti, y elijo ser sincero contigo a partir de ahora por siempre, aunque a veces la verdad duela',
         'Estoy dispuesto a hacer el esfuerzo para que te sientas querida y segura conmigo',
-        'Ayer tuve uno de los mejores días contigo.',
-        'Gracias por tu paciencia (soy medio insoportable igual que VOCE 😅).',
+        'Ayer tuve uno de los mejores días contigo viendo a esos macacos locos, tigres, leones, loros, cabras que me hacian acordar a Luna (NOOOO Luna) y mucho mas.',
+        'Gracias por tu paciencia siempre y por aguantarme todo momento (soy medio insoportable igual que VOCE 😅)',
       ];
       typeLines(lines, 4000, () => {
         addMsg('Tu me quieres? ❤️');
         addButtons([
-          { label: 'Sí', onClick: () => pasoSi() },
-          { label: 'No', onClick: () => pasoNo() }
+          { label: 'Sí mi Gato', onClick: () => pasoSi() },
+          { label: 'No, estoy loca', onClick: () => pasoNo() }
         ]);
       });
     }
@@ -117,7 +117,7 @@
     function pasoSi() {
       typeLines([
         'Gracias por decirme que sí mi brontosaurio ❤️',
-        'Obrigado por aguantarme',
+        'Obrigado por aguantarme (yo a voce la aguanto mucho mas pero bueno todo bien baby) (BROMA)',
         'Quiero demostrarte con hechos lo que siento',
         'Si te parece, hablemos hoy un ratito mas hoy mi bebecita linda ok???'
       ], 4000, () => {
@@ -132,8 +132,12 @@
     function pasoNo() {
       typeLines([
         'Qué pena 😔',
+        'Whatever',
+        'Lo que sea',
+        'Me da igual',
         'Gracias por ser honesta.',
         'No te molesto más. Si algún día cambias de idea, aquí estaré mi doida.',
+        'Hablamos MUCHACHOS',
       ], 4000, cierre);
     }
 
@@ -158,5 +162,6 @@
   </script>
 </body>
 </html>
+
 
 
