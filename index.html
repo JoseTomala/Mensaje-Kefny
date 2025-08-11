@@ -80,7 +80,7 @@
     }
 
     // 4 segundos por defecto entre mensajes
-    function typeLines(lines, gap = 4000, then = null) {
+    function typeLines(lines, gap = 3000, then = null) {
       let i = 0;
       (function next(){
         if (i >= lines.length) { if (then) setTimeout(then, 350); return; }
@@ -91,22 +91,22 @@
 
     function startFlow(){
       addMsg('Hola mi bebecita hermosa preciosa! 👋', 'bot');
-      addButtons([{ label: '¡Hola!', onClick: () => paso1() }]);
+      addButtons([{ label: 'Hola!', onClick: () => paso1() }]);
     }
 
     function paso1() {
       const lines = [
         'Sé que ayer tuvimos un problema.',
-        'Te mentí, y te enojaste conmigo. Cometí un error y la verdad que no hay excusas.',
-        'Sé que esperabas que yo pusiera más esfuerzo para entenderte... en vez de eso te di espacio.',
-        'Quiero que sepas que te quiero mucho. Me sale natural hacer cosas por ti porque lo siento de verdad.',
-        'Siento amor por ti, y elijo ser sincero contigo a partir de ahora por siempre, aunque a veces la verdad duela.',
-        'Estoy dispuesto a hacer el esfuerzo para que te sientas querida y segura conmigo.',
+        'Te mentí, y te enojaste conmigo. Cometí un error y la verdad que no hay excusas',
+        'Sé que esperabas que yo pusiera más esfuerzo para entenderte... en vez de eso te di espacio',
+        'Quiero que sepas que te quiero mucho. Me sale natural hacer cosas por ti porque lo siento de verdad',
+        'Siento amor por ti, y elijo ser sincero contigo a partir de ahora por siempre, aunque a veces la verdad duela',
+        'Estoy dispuesto a hacer el esfuerzo para que te sientas querida y segura conmigo',
         'Ayer tuve uno de los mejores días contigo.',
         'Gracias por tu paciencia (soy medio insoportable igual que VOCE 😅).',
       ];
       typeLines(lines, 4000, () => {
-        addMsg('¿Tú me quieres? ❤️');
+        addMsg('Tu me quieres? ❤️');
         addButtons([
           { label: 'Sí', onClick: () => pasoSi() },
           { label: 'No', onClick: () => pasoNo() }
@@ -117,11 +117,11 @@
     function pasoSi() {
       typeLines([
         'Gracias por decirme que sí mi brontosaurio ❤️',
-        'Obrigado por bancarme.',
-        'Quiero demostrarte con hechos lo que siento.',
-        'Si te parece, hablemos hoy un ratito. Estoy acá para escucharte.'
+        'Obrigado por aguantarme',
+        'Quiero demostrarte con hechos lo que siento',
+        'Si te parece, hablemos hoy un ratito mas hoy mi bebecita linda ok???'
       ], 4000, () => {
-        addMsg('¿Quieres que te escriba más tarde o prefieres ahora?');
+        addMsg('Quieres que te llame más tarde o prefieres ahora?');
         addButtons([
           { label: 'Ahora', onClick: () => { addMsg('Listo. Te llamo en unos minutos. 💬'); cierre(); } },
           { label: 'Más tarde', onClick: () => { addMsg('Perfecto, te escribo más tarde. Obrigado por la paciencia 🙏'); cierre(); } }
@@ -133,7 +133,7 @@
       typeLines([
         'Qué pena 😔',
         'Gracias por ser honesta.',
-        'No te molesto más. Si algún día cambias de idea, aquí estaré.',
+        'No te molesto más. Si algún día cambias de idea, aquí estaré mi doida.',
       ], 4000, cierre);
     }
 
@@ -158,4 +158,5 @@
   </script>
 </body>
 </html>
+
 
