@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Para Kephne 💬</title>
+  <title>Para Kefny 💬</title>
   <meta name="description" content="Un mensajito sincero y ligero." />
   <style>
     :root { --brand:#0f62fe; --bg:#f4f6f8; --card:#fff; --line:#e5e7eb; }
@@ -28,7 +28,7 @@
 </head>
 <body>
   <div class="app">
-    <header>Un mensajito para ti 💙</header>
+    <header>Un mensaje para Kefny el amor de mi vida 💙</header>
     <div id="chat"></div>
     <div class="hint">Privado y simple. Nada se envía a servidores.</div>
     <form id="send">
@@ -84,7 +84,7 @@
 
     function startFlow(){
       // Paso 0: saludo
-      addMsg('¡Hola, Kephne! 👋', 'bot');
+      addMsg('Hola mi bebecita hermosa preciosa! 👋', 'bot');
       addButtons([
         { label: '¡Hola!', onClick: () => paso1() }
       ]);
@@ -94,16 +94,16 @@
       // Mensajes sinceros (Guion A)
       const lines = [
         'Sé que ayer tuvimos un problema.',
-        'Te mentí (no fue heavy), y te enojaste conmigo. La regué, sin excusas.',
-        'Sé que esperabas que yo pusiera más esfuerzo para entenderte; en vez de eso te di espacio.',
+        'Te mentí, y te enojaste conmigo. Cometi un error y la verdad que no hay excusas.',
+        'Sé que esperabas que yo pusiera más esfuerzo para entenderte... en vez de eso te di espacio.',
         'Quiero que sepas que te quiero mucho. Me sale natural hacer cosas por ti porque lo siento de verdad.',
-        'Siento amor por ti, y elijo ser sincero contigo, aunque a veces la verdad duela.',
+        'Siento amor por ti, y elijo ser sincero contigo a partir de ahora por siempre, aunque a veces la verdad duela.',
         'Estoy dispuesto a hacer el esfuerzo para que te sientas querida y segura conmigo.',
         'Ayer tuve uno de los mejores días contigo.',
-        'Gracias por tu paciencia (sí, soy medio insoportable 😅).',
+        'Gracias por tu paciencia (soy medio insoportable igual que VOCE 😅).',
       ];
       typeLines(lines, 750, () => {
-        addMsg('¿Tú me quieres? ❤️');
+        addMsg('Tú me quieres? ❤️');
         addButtons([
           { label: 'Sí', onClick: () => pasoSi() },
           { label: 'No', onClick: () => pasoNo() }
@@ -113,15 +113,15 @@
 
     function pasoSi() {
       typeLines([
-        'Gracias por decirme que sí ❤️',
-        'Valeu / obrigado por bancarme.',
+        'Gracias por decirme que si mi brontosaurio ❤️',
+        'Obrigado por bancarme.',
         'Quiero demostrarte con hechos lo que siento.',
         'Si te parece, hablemos hoy un ratito. Estoy acá para escucharte.'
       ], 700, () => {
-        addMsg('¿Quieres que te escriba más tarde o prefieres ahora?');
+        addMsg('Quieres que te escriba más tarde o prefieres ahora?');
         addButtons([
           { label: 'Ahora', onClick: () => { addMsg('Listo. Te llamo en unos minutos. 💬'); cierre(); } },
-          { label: 'Más tarde', onClick: () => { addMsg('Perfecto, te escribo más tarde. Obrigado pela paciência 🙏'); cierre(); } }
+          { label: 'Más tarde', onClick: () => { addMsg('Perfecto, te escribo más tarde. Obrigado por la paciencia 🙏'); cierre(); } }
         ]);
       });
     }
@@ -156,4 +156,5 @@
     window.addEventListener('load', startFlow);
   </script>
 </body>
+
 </html>
