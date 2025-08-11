@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Para Kephne 💬</title>
+  <meta name="description" content="Un mensajito sincero y ligero." />
+  <style>
+    :root { --brand:#0f62fe; --bg:#f4f6f8; --card:#fff; --line:#e5e7eb; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:var(--bg); color:#111; }
+    .app { max-width: 700px; height: 100svh; margin: 0 auto; display:flex; flex-direction:column; }
+    header { padding: 14px 16px; background: var(--brand); color: #fff; font-weight: 700; }
+    #chat { flex:1; overflow:auto; padding: 14px; display:flex; flex-direction:column; gap:10px; }
+    .msg { max-width: 82%; padding:10px 12px; border-radius:14px; line-height:1.35; word-wrap: break-word; }
+    .bot { background: var(--card); border:1px solid var(--line); align-self:flex-start; }
+    .you { background: var(--brand); color:#fff; align-self:flex-end; }
+    .hint { font-size:12px; color:#6b7280; text-align:center; padding:6px 0 10px; }
+    form { display:flex; gap:8px; padding: 12px; background:#fff; border-top:1px solid var(--line); }
+    input { flex:1; padding:12px; border:1px solid #cfd6e4; border-radius: 10px; font-size:16px; }
+    button { padding:12px 14px; border:0; border-radius:10px; background: var(--brand); color:#fff; font-weight:600; cursor:pointer; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip { background:#fff; border:1px solid var(--line); border-radius:999px; padding:8px 12px; cursor:pointer; }
+    .fade-in { animation: fade .18s ease-in; }
+    @keyframes fade { from { opacity:0; transform:translateY(2px) } to { opacity:1; transform:none } }
+    .muted { color:#6b7280; font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>Un mensajito para ti 💙</header>
+    <div id="chat"></div>
+    <div class="hint">Privado y simple. Nada se envía a servidores.</div>
+    <form id="send">
+      <input id="input" autocomplete="off" placeholder="Escribe aquí… (opcional)" />
+      <button>Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const form = document.getElementById('send');
+    const input = document.getElementById('input');
+
+    const state = { step: 0 };
+
+    function addMsg(text, who='bot') {
+      const node = document.createElement('div');
+      node.className = `msg ${who} fade-in`;
+      node.textContent = text;
+      chat.appendChild(node);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function addButtons(options = []) {
+      const wrap = document.createElement('div');
+      wrap.className = 'chips fade-in';
+      options.forEach(opt => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip';
+        b.textContent = opt.label;
+        b.addEventListener('click', () => {
+          // echo
+          addMsg(opt.label, 'you');
+          wrap.querySelectorAll('button').forEach(x => x.disabled = true);
+          wrap.style.opacity = .6;
+          setTimeout(() => opt.onClick && opt.onClick(), 350);
+        });
+        wrap.appendChild(b);
+      });
+      chat.appendChild(wrap);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function typeLines(lines, gap = 650, then = null) {
+      let i = 0;
+      (function next(){
+        if (i >= lines.length) { if (then) setTimeout(then, 350); return; }
+        addMsg(lines[i++], 'bot');
+        setTimeout(next, gap);
+      })();
+    }
+
+    function startFlow(){
+      // Paso 0: saludo
+      addMsg('¡Hola, Kephne! 👋', 'bot');
+      addButtons([
+        { label: '¡Hola!', onClick: () => paso1() }
+      ]);
+    }
+
+    function paso1() {
+      // Mensajes sinceros (Guion A)
+      const lines = [
+        'Sé que ayer tuvimos un problema.',
+        'Te mentí (no fue heavy), y te enojaste conmigo. La regué, sin excusas.',
+        'Sé que esperabas que yo pusiera más esfuerzo para entenderte; en vez de eso te di espacio.',
+        'Quiero que sepas que te quiero mucho. Me sale natural hacer cosas por ti porque lo siento de verdad.',
+        'Siento amor por ti, y elijo ser sincero contigo, aunque a veces la verdad duela.',
+        'Estoy dispuesto a hacer el esfuerzo para que te sientas querida y segura conmigo.',
+        'Ayer tuve uno de los mejores días contigo.',
+        'Gracias por tu paciencia (sí, soy medio insoportable 😅).',
+      ];
+      typeLines(lines, 750, () => {
+        addMsg('¿Tú me quieres? ❤️');
+        addButtons([
+          { label: 'Sí', onClick: () => pasoSi() },
+          { label: 'No', onClick: () => pasoNo() }
+        ]);
+      });
+    }
+
+    function pasoSi() {
+      typeLines([
+        'Gracias por decirme que sí ❤️',
+        'Valeu / obrigado por bancarme.',
+        'Quiero demostrarte con hechos lo que siento.',
+        'Si te parece, hablemos hoy un ratito. Estoy acá para escucharte.'
+      ], 700, () => {
+        addMsg('¿Quieres que te escriba más tarde o prefieres ahora?');
+        addButtons([
+          { label: 'Ahora', onClick: () => { addMsg('Listo. Te llamo en unos minutos. 💬'); cierre(); } },
+          { label: 'Más tarde', onClick: () => { addMsg('Perfecto, te escribo más tarde. Obrigado pela paciência 🙏'); cierre(); } }
+        ]);
+      });
+    }
+
+    function pasoNo() {
+      typeLines([
+        'Qué pena 😔',
+        'Gracias por ser honesta.',
+        'No te molesto más. Si algún día cambias de idea, aquí estaré.',
+      ], 750, cierre);
+    }
+
+    function cierre() {
+      const small = document.createElement('div');
+      small.className = 'muted';
+      small.textContent = 'Fin del mensajito. Gracias por leer. 💙';
+      chat.appendChild(small);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    // Envío libre (opcional)
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      addMsg(text, 'you');
+      input.value = '';
+      // Después del guion, solo respondo amable
+      if (state.step >= 99) addMsg('Gracias por escribirme 💬', 'bot');
+    });
+
+    window.addEventListener('load', startFlow);
+  </script>
+</body>
+</html>
